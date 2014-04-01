@@ -1,4 +1,5 @@
 <?php 
+//custom data
 $data = array(
 	'image' => array(
 		'path' => 'http://localhost/test/new-spot-the-difference-master2/spot-the-difference.jpg',
@@ -13,8 +14,6 @@ $data = array(
 		),
 	
 	);
-
-
 $img_data = json_encode($data);
 ?>
 <!DOCTYPE>
@@ -27,16 +26,14 @@ $img_data = json_encode($data);
 var x,y;
 var count = 0;
 var length = 0;
-//customized data
-  
-  var img_data = <?php print $img_data?>;
-  // var img_data = {"image":{"path":"http:\/\/localhost\/test\/new-spot-the-difference-master2\/spot-the-difference.jpg","width":"800","height":"600"},"data":{"x_array":[270,132,272,284,369],"y_array":[6,282,390,169,385],"rad_array":[25,16,16,16,10]}};
-  var total_seconds = img_data.data.seconds;
-  //center position x, y and radius
-  var x_array=img_data.data.x_array;     
-  var y_array=img_data.data.y_array;
-  var rad_array=img_data.data.rad_array;
-  //--end of customized data
+//customized data  
+var img_data = <?php print $img_data?>;
+var total_seconds = img_data.data.seconds;
+//center position x, y and radius
+var x_array=img_data.data.x_array;     
+var y_array=img_data.data.y_array;
+var rad_array=img_data.data.rad_array;
+//--end of customized data
 
 function Cirkus(centerX,centerY, radius ) {
 var canvas=document.getElementById("Canvas");
@@ -56,7 +53,7 @@ var img=document.getElementById('image1');
 function position (e)
 {
 	var x_diff;
-    var y_diff;
+  var y_diff;
 	var distance0, distance1;
 	var width=document.getElementById('Canvas').width;
 	var offset_left =  document.getElementById('Canvas').offsetLeft;
@@ -102,20 +99,19 @@ function position (e)
 			}
 	  }
   }
-
-
 }
-toHHMMSS = function (seconds) {
-    var sec_num = parseInt(seconds); // don't forget the second param
-    var hours   = Math.floor(sec_num / 3600);
-    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-    var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-    if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
-    var time    = hours+':'+minutes+':'+seconds;
-    return time;
+function toHHMMSS(seconds) {
+  var sec_num = parseInt(seconds); // don't forget the second param
+  var hours   = Math.floor(sec_num / 3600);
+  var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+  var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+  if (hours   < 10) {hours   = "0"+hours;}
+  if (minutes < 10) {minutes = "0"+minutes;}
+  if (seconds < 10) {seconds = "0"+seconds;}
+  var time    = hours+':'+minutes+':'+seconds;
+  return time;
 }
 
 function img ()
@@ -124,7 +120,6 @@ function img ()
 	var canvas=document.getElementById("Canvas");
 	var img=document.getElementById('image1'); 
 	//Refer to the image
-	
 	var obCanvas = canvas.getContext('2d');
 	obCanvas.drawImage(img,0,0);
 	obCanvas.stroke();
@@ -139,9 +134,7 @@ function update_timer()
 		clearInterval(timer);
 		alert('Time Out, click to reload page to restart the game.');
 		location.reload();
-	}
-	
-	
+	}	
 }
 
 var timer = setInterval(update_timer, 1000);
@@ -154,26 +147,21 @@ var timer = setInterval(update_timer, 1000);
 		width: <?php print $data['image']['width'];?>px;
 	}
 	.timer{
-		font-size: 3em;
+		font-size: 2em;
+		color: red;
 	}
 </style>
 
-<body onload="img()">
-	
+<body onload="img()">	
 	<div class="wrap">
 		<h1>Spot the Difference Game</h1>
-				<div id="original">
-<p>Can you spot the differences?  Click on all 5 of them in the picture on the right to be entered to win.</p><br />
+		<p>Can you spot the differences?  Click on all 5 of them in the picture on the right to be entered to win.</p>
 		
 		<div class="timer"><span>Time Left:</span><span id="timer_number"></span></div>
-        <canvas id="Canvas" width="<?php print $data['image']['width'];?>" height="<?php print $data['image']['height'];?>" onclick="position()"> 
-             Your browser does not support Canvas. 
-        </canvas>
-     </div>
-        
-
-<img id="image1" src="<?php print $data['image']['path'];?>"  border="0"  width="0" height="0" />
-
-
+    <canvas id="Canvas" width="<?php print $data['image']['width'];?>" height="<?php print $data['image']['height'];?>" onclick="position()"> 
+         Your browser does not support Canvas. 
+    </canvas>
+  </div>
+	<img id="image1" src="<?php print $data['image']['path'];?>"  border="0"  width="0" height="0" />
 </body>
 </html>
