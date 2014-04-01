@@ -93,6 +93,7 @@ function position (e)
 				if(length == count)
 				{
 					clearInterval(timer);
+					document.getElementById("timer").innerHTML = 'Congratulations!';
 					alert('Congratulations! You\'ve found all the ' + length + ' differences');
 				}
 				
@@ -157,7 +158,7 @@ var timer = setInterval(update_timer, 1000);
 		<h1>Spot the Difference Game</h1>
 		<p>Can you spot the differences?  Click on all 5 of them in the picture on the right to be entered to win.</p>
 		
-		<div class="timer"><span>Time Left:</span><span id="timer_number"></span></div>
+		<div class="timer" id="timer"><span>Time Left:</span><span id="timer_number"></span></div>
     <canvas id="Canvas" width="<?php print $data['image']['width'];?>" height="<?php print $data['image']['height'];?>" onclick="position()"> 
          Your browser does not support Canvas. 
     </canvas>
