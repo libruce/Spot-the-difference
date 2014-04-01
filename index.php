@@ -59,7 +59,7 @@ function position (e)
 	var offset_left =  document.getElementById('Canvas').offsetLeft;
 	var offset_top =  document.getElementById('Canvas').offsetTop;
 
- 	e = e || window.event
+ 	e = arguments.callee.caller.arguments[0] || window.event
 
 	if (e.pageX == null && e.clientX != null ) { 
 		var html = document.documentElement
@@ -77,7 +77,7 @@ function position (e)
 
   if(x_array.length == y_array.length)
   {
-  	  length = x_array.length;
+  	length = x_array.length;
 	  for (var i = 0; i < length; i++) {
 			x_diff=x_array[i]-x;
 			y_diff=y_array[i]-y;
